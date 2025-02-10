@@ -14,6 +14,7 @@
 // import the file using a syntax like this:
 /* import { sounds } from "./path/to/file.js"; */
 
+//*1.1. Catch the html element with id drumkit: */
 //! write code for part 1 here
 
 //*1.1. Write a console log for the fetched sounds so you know how the structure is and how you can use it */
