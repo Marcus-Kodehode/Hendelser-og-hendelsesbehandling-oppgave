@@ -1,7 +1,22 @@
-
 export const sounds = [
-        { file: "pathTofile", key: "keyboardKeyTobePressed" },
-        { file: "pathTofile", key: "keyboardKeyTobePressed" },
-        { file: "pathTofile", key: "keyboardKeyTobePressed" },
-        { file: "pathTofile", key: "keyboardKeyTobePressed" },
-]
+  {
+    name: "name of the sound",
+    file: "pathTofile",
+    key: "keyboardKeyTobePressed",
+  },
+  {
+    name: "name of the sound",
+    file: "pathTofile",
+    key: "keyboardKeyTobePressed",
+  },
+  {
+    name: "name of the sound",
+    file: "pathTofile",
+    key: "keyboardKeyTobePressed",
+  },
+  {
+    name: "name of the sound",
+    file: "pathTofile",
+    key: "keyboardKeyTobePressed",
+  },
+];
