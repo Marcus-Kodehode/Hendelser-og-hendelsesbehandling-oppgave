@@ -38,16 +38,8 @@ function drumComponent(sound) {
 
   // add textContent to the created buttonElement. Textcontent should be either the file name and/or key needed to be pressed
 
-  //! add the buttonEl.textContent here
-
-  //* 3.2. finish the audioEl variables that should create an audio element with .createElement
-
-  const audioEl = document;
-
+  //3.2. make a variables that create an audio element with .createElement
   //the audio element that is created should have the src equal to the file source
-
-  //! add the audioEl.src here
-
   //the audio element that is created should have the id equal to the textcontent created in 3.1.
 
   //! add the audioEl.id here
