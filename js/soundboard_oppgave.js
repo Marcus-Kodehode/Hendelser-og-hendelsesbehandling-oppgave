@@ -15,19 +15,20 @@
 /* import { sounds } from "./path/to/file.js"; */
 
 //*1.1. Catch the html element with id drumkit: */
+
 //! write code for part 1 here
 
-//*1.1. Write a console log for the fetched sounds so you know how the structure is and how you can use it */
+//*1.2 console.log the drumkit element: */
 
-//! write code for part 1.1 here
+//! write code for part 1.2 here
 
-//*2. Catch the html element with id drumkit: */
+//*2 Write a console log for the fetched sounds so you know how the structure is and how you can use it */
 
 //! write code for part 2 here
 
-//*2.1 console.log the drumkit element: */
+//*2.2 Write a console log for the fetched sounds keys so you know to use the different parts of the data */
 
-//! write code for part 2.1 here
+//! write code for part 2.2 here
 
 //*3. Finish the function below to create a functioning soundboard:: */
 
