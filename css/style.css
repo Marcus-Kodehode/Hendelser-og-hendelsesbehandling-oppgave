@@ -1,1 +1,63 @@
 /* Add styles here to make the soundboard actually look like a soundboard! */
+/* 1. Generell layout for soundboardet */
+#drumkit {
+    display: flex;              /* Bruk Flexbox for å organisere knappene */
+    flex-wrap: wrap;            /* Sørger for at knappene brytes til neste linje når det er nødvendig */
+    justify-content: center;    /* Sentrerer knappene horisontalt */
+    margin-top: 50px;           /* Legger til litt plass over soundboardet */
+    padding: 10px;
+    gap: 20px;                  /* Legger til litt avstand mellom knappene */
+}
+
+/* 2. Styling av knappene */
+button {
+    padding: 20px 40px;         /* Øker størrelsen på knappene for en bedre brukeropplevelse */
+    font-size: 18px;            /* Større tekst på knappene */
+    margin: 10px;               /* Legger til litt plass mellom knappene */
+    background-color: #4CAF50;  /* Grønn bakgrunnsfarge */
+    color: white;               /* Hvit tekstfarge */
+    border: none;               /* Fjerner standard kantlinje */
+    border-radius: 10px;        /* Runde hjørner på knappene */
+    cursor: pointer;           /* Endrer musepekeren når man holder over knappene */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Legger til en myk skygge for dybde */
+    transition: all 0.3s ease-in-out; /* Jevn overgang for alle effekter */
+}
+
+/* 3. Effekter når man holder musen over knappene (hover) */
+button:hover {
+    background-color: #45a049;  /* Mørkere grønn bakgrunn når man holder musen over */
+    transform: scale(1.1);       /* Øker størrelsen på knappen litt ved hover */
+}
+
+/* 4. Effekter når knappen trykkes (active) */
+button:active {
+    background-color: #388e3c;  /* En mørkere grønn bakgrunn når knappen er trykket */
+    transform: scale(1);         /* Tilbakestiller størrelsen etter at knappen er trykket */
+}
+
+/* 5. Styling for audio-elementene (skjuler dem) */
+audio {
+    display: none;              /* Skjuler audio-elementene, de er kun nødvendige for å spille av lydene */
+}
+
+/* 6. Spesifikk styling for den nye raden (for de 3 nye knappene) */
+#drumkit > div {
+    width: 100%;                /* Sørger for at den nye raden tar opp hele bredden */
+    display: flex;              /* Flexbox for de nye knappene */
+    justify-content: center;    /* Sentraliserer knappene */
+    margin-top: 20px;           /* Legger til litt avstand før den nye raden */
+}
+
+/* 7. Legger til litt ekstra styling på hver knapp (for å gjøre dem mer visuelle) */
+button {
+    font-weight: bold;           /* Gjør teksten tykkere for å gjøre knappene mer synlige */
+    text-transform: uppercase;   /* Gjør teksten til store bokstaver */
+    letter-spacing: 1px;         /* Litt mer avstand mellom bokstavene for visuell effekt */
+}
+
+/* 8. Boks-skugge-effekt for knappene */
+button {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* En tydeligere skygge for dybdeeffekt */
+}
+
+

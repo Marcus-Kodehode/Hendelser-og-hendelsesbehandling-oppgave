@@ -1,82 +1,88 @@
-//! Comment like this can be removed after finishing the tasks
+import { sounds } from "./sounds.js";  // Importer lydene fra sounds.js-filen
 
-//*1. Create an external JSON or js file containing information about the sounds you want to use. Import the file in here: */
+//*1.1. Catch the html element with id drumkit:
+const drumkit = document.getElementById("drumkit");  // Fange drumkit-elementet
 
-//* If using json file: */
-// fetch it through a function using a syntax like this:
-/* async function fetchData() {
-    const response = await fetch("path/to/file.json");
-    const data = await response.json();
-    return data;
-}  */
+//*1.2. console.log the drumkit element:
+console.log(drumkit);  // Logg drumkit-elementet til konsollen for å forsikre oss om at vi har fått tak i det
 
-//* If using js file: */
-// import the file using a syntax like this:
-/* import { sounds } from "./path/to/file.js"; */
+//*2. Write a console log for the fetched sounds so you know how the structure is and how you can use it */
+console.log(sounds);  // Logg lydene for å se strukturen
 
-//*1.1. Catch the html element with id drumkit: */
+//*2.2. Write a console log for the fetched sounds keys so you know to use the different parts of the data */
+console.log(Object.keys(sounds[0]));  // Logg nøklene i første lydobjekt for å vite hvordan vi kan referere til dataene (f.eks. "name" og "file")
 
-//! write code for part 1 here
-
-//*1.2 console.log the drumkit element: */
-
-//! write code for part 1.2 here
-
-//*2 Write a console log for the fetched sounds so you know how the structure is and how you can use it */
-
-//! write code for part 2 here
-
-//*2.2 Write a console log for the fetched sounds keys so you know to use the different parts of the data */
-
-//! write code for part 2.2 here
-
-//*3. Finish the function below to create a functioning soundboard:: */
-
+//*3. Finish the function below to create a functioning soundboard:
 function drumComponent(sound) {
-  //* 3.1. finish the buttenEl variable that should create a button element with .createElement
+    // 3.1: Lag en knapp for å spille lyden
+    const buttonEl = document.createElement("button");
+    buttonEl.textContent = sound.name;  // Setter knappens tekst til lydenavnet (f.eks. "Applaus")
 
-  const buttonEl = document;
+    // 3.2: Lag et audio-element for lyden
+    const audioEl = document.createElement("audio");
+    audioEl.src = sound.file;  // Setter lydfilens kilde (URL) fra "sounds.js"
+    audioEl.id = sound.name;   // Setter ID på lydfilen til knappens navn
 
-  // add textContent to the created buttonElement. Textcontent should be either the file name and/or key needed to be pressed
+    // 3.3: Legger til event listener på knappen, som stopper andre lyder og spiller den valgte lyden
+    buttonEl.addEventListener("click", () => {
+        // Stopp alle lyder
+        const allAudio = document.querySelectorAll("audio");
+        allAudio.forEach((audio) => {
+            audio.pause();  // Stopp lyden
+            audio.currentTime = 0;  // Sett lyden tilbake til starten
+        });
 
-  //3.2. make a variables that create an audio element with .createElement
-  //the audio element that is created should have the src equal to the file source
-  //the audio element that is created should have the id equal to the textcontent created in 3.1.
+        // Spill av den valgte lyden
+        audioEl.play();
 
-  //! add the audioEl.id here
+        // Stopp lyden etter 10 sekunder (kan endres til ønsket tid)
+        setTimeout(() => {
+            audioEl.pause();  // Stopp lyden etter 10 sekunder
+            audioEl.currentTime = 0;  // Tilbakestill lyden til starten
+        }, 10000);
+    });
 
-  //*3.3. OPTIONAL. finish the eventlistner to the whole page (document) that should:
-  //active when pressing a keyboard key (first parameter of the eventlistener)
-
-  document.addEventListener("???", (event) => {
-    // finish the key variable that refers to the key pressed
-    const key = event;
-    // make a conditional logic that asks if the variable created just above is the same as the sound key that should be pressed (the key "key" in the js or JSON data you created)
-    if (key === "the key referanse in the data you are using") {
-      // code for playing the audio element
-    }
-  });
-
-  //* 3.4. OPTIONAL. If you used keydown as the first parameter in the previous eventlistener, add another eventlistner to the whole page that:
-  //actives when releasing a keyboard key (first parameter of the eventlistener)
-  document.addEventListener("???", (event) => {
-    // code that pauses the audio element
-    // code that sets the current time of the audio element to 0
-  });
-
-  //3.5. Create an eventlistener for clicking. OPTIONAL: Also create a logic for preventing more sounds to be played at the same time
-  buttonEl.addEventListener("???", () => {
-    // code that plays the audioEl
-  });
-  //3.6. append the created button and audio element to the html element you refered in 1.
-  // code that appends the buttonEl and audioEl to the drumkit element
+    return { buttonEl, audioEl };  // Returner både knapp og lyd-element for videre behandling
 }
 
-//*4. Create a function that loops over the sounds (from the data file you created). Use that function created in 3. to use the logic there to create the buttons. I prefer that you use .forEach or .map */
+// Funksjon for å generere knappene og gruppere de tre nye knappene på en ny rad
 function createDrumKit() {
-  // forEach logic that loops over each sound in the data you are using
-  // each time the loops run it should call the drumComponent function
+    // Opprett en div for de tre nye knappene (for å gruppere dem på en egen linje)
+    const newRow = document.createElement("div");
+    newRow.style.display = "flex";  // Bruk Flexbox for å organisere knappene horisontalt
+    newRow.style.flexWrap = "wrap"; // Sørg for at knappene brytes til neste linje hvis nødvendig
+    newRow.style.justifyContent = "center";  // Sentrer knappene på linjen
+
+    // Generere knapper for de gamle og nye lydene
+    sounds.forEach((sound, index) => {
+        const { buttonEl, audioEl } = drumComponent(sound);  // Generer knapp og audio-element for hver lyd
+
+        // Hvis lyden er en av de tre nye (index >= 6), legg den til i den nye raden
+        if (index >= 6) {
+            newRow.appendChild(buttonEl);  // Legg til knappen i den nye raden
+            newRow.appendChild(audioEl);   // Legg til audio-elementet i den nye raden
+        } else {
+            // Ellers legg knappene for de gamle lydene direkte til drumkit
+            drumkit.appendChild(buttonEl);  
+            drumkit.appendChild(audioEl);
+        }
+    });
+
+    // Legg til den nye raden med de 3 nye knappene i drumkit
+    drumkit.appendChild(newRow);  // Legger den nye raden med de tre nye knappene til drumkit
 }
 
-//*4.1 Call on the function that loops over the sounds and creates the buttons */
-// call the function from part 4 here
+// Kall funksjonen for å generere knappene
+createDrumKit();  // Kaller funksjonen som genererer og legger til knappene på siden
+
+
+
+// Import av lyder: Koden importerer en sounds-array fra sounds.js, som inneholder informasjon om navn og filbaner til lydene.
+
+// drumComponent funksjonen: Denne funksjonen tar en lyd (et objekt fra sounds-arrayen), lager en knapp og et audio-element for lyden, og legger til en click event listener på knappen for å spille av lyden. Når knappen klikkes, stopper alle andre lyder, og den aktuelle lyden spilles. Lyden stoppes etter 10 sekunder (du kan endre dette tallet).
+
+// Generering av knapper: Funksjonen createDrumKit går gjennom alle lydene i sounds-arrayen og kaller på drumComponent for å generere knappene og lyd-elementene. De nye knappene (de som er på rad 2) grupperes i en egen div (med en flex layout) slik at de vises på en ny linje under de gamle knappene.
+
+// CSS: Flexbox brukes til å organisere knappene i to rader. Den første raden har de gamle knappene, og den andre raden har de nye knappene.
+
+
